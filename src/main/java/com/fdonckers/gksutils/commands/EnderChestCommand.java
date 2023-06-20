@@ -36,7 +36,7 @@ public class EnderChestCommand {
             containerName = Text.literal(sourcePlayer.getDisplayName().getString() + "'s enderchest");
         }
         
-        sourcePlayer.sendMessage(Text.literal("Opening " + containerName));
+        sourcePlayer.sendMessage(Text.literal("Opening " + containerName.getString()));
 
         sourcePlayer.openHandledScreen(new SimpleNamedScreenHandlerFactory((syncId, inventory, player) -> GenericContainerScreenHandler.createGeneric9x3(syncId, inventory, enderChestInventory), containerName));
         return 1;   
