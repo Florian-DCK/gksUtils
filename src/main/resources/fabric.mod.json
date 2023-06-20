@@ -8,8 +8,8 @@
 		"Donckers Florian"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://github.com/Florian-DCK/gksUtils",
+		"sources": "https://github.com/Florian-DCK/gksUtils"
 	},
 	"license": "MIT",
 	"icon": "assets/gksutils/icon.png",
