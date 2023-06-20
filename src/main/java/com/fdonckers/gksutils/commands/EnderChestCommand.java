@@ -4,6 +4,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.ArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.mojang.brigadier.tree.LiteralCommandNode;
 
 import me.lucko.fabric.api.permissions.v0.Permissions;
 import net.minecraft.command.CommandRegistryAccess;
@@ -19,12 +20,16 @@ import net.minecraft.text.Text;
 
 public class EnderChestCommand {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registryAccess, CommandManager.RegistrationEnvironment environment) {
-        dispatcher.register(CommandManager.literal("enderchest")
+        LiteralCommandNode<ServerCommandSource> enderchest =  dispatcher.register(CommandManager.literal("enderchest")
         .requires(Permissions.require("gksutils.command.enderchest.self"))
         .executes(context -> run(context, null) )
             .then((ArgumentBuilder<ServerCommandSource, ?>)CommandManager.argument("target", EntityArgumentType.players())
             .requires(Permissions.require("gksutils.command.enderchest.others"))
             .executes(context -> run(context, EntityArgumentType.getPlayer(context, "target")))));
+
+        dispatcher.register(CommandManager.literal("ec")
+        .executes(context -> run(context, null) )
+        .redirect(enderchest));
     }
 
     public static int run(CommandContext<ServerCommandSource> context, ServerPlayerEntity target) throws CommandSyntaxException {
